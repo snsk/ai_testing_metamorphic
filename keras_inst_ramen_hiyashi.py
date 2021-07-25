@@ -1,5 +1,5 @@
 import keras
-from keras.utils import np_utils
+from keras.utils import np_utils, plot_model
 from keras.models import Sequential
 from keras.layers.convolutional import Conv2D, MaxPooling2D
 from keras.layers.core import Dense, Dropout, Activation, Flatten
@@ -43,39 +43,41 @@ Y_test :評価用正解データ
 '''
 
 # CNNを構築
+# Sequentialモデルは addされたモデル層が一列に並ぶ
 model = Sequential()
 
-model.add(Conv2D(32, (3, 3), padding='same',input_shape=X_train.shape[1:]))
-model.add(Activation('relu'))
-model.add(Conv2D(32, (3, 3)))
-model.add(Activation('relu'))
+#Conv2D:2次元畳み込み層 3x3のパネルを32枚使う。padding='same' で出力画像のサイズが変わらないようにする
+model.add(Conv2D(32, (3, 3), padding='same',input_shape=X_train.shape[1:], activation='relu'))
+model.add(Conv2D(32, (3, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
+model.add(Dropout(0.5))
 
-model.add(Conv2D(64, (3, 3), padding='same'))
-model.add(Activation('relu'))
-model.add(Conv2D(64, (3, 3)))
-model.add(Activation('relu'))
+model.add(Conv2D(64, (3, 3), padding='same', activation='relu'))
+model.add(Conv2D(64, (3, 3), activation='relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
-model.add(Dropout(0.25))
+model.add(Dropout(0.5))
 
 model.add(Flatten())
-model.add(Dense(512))
-model.add(Activation('relu'))
+model.add(Dense(512, activation='relu'))
 model.add(Dropout(0.5))
-model.add(Dense(2))
-model.add(Activation('softmax'))
+model.add(Dense(2, activation='softmax'))
 
 #モデルのコンパイル
 model.compile(
     loss='categorical_crossentropy',
-    optimizer='SGD',
+    optimizer='sgd',
     metrics=['accuracy']
 )
 
 #モデルの訓練
-epochs_num=30
+epochs_num=200
 result = model.fit(X_train, Y_train, epochs=epochs_num, validation_data=(X_test, Y_test))
+
+#modelのビジュアル可視化。要install and PATH setting GraphViz, pydot
+#functional API を利用した複雑なモデルの時はこちら
+plot_model(model, to_file='./model.png', show_shapes=True, expand_nested=True)
+#modelのテキスト可視化。Sequentialモデルならこれでも十分、らしい
+#print(model.summary())
 
 import matplotlib.pyplot as plt
  

@@ -32,6 +32,21 @@ model.summary()
 読み出しは load_model() でファイル名を指定。
 model.summary でどのようなモデルかを表示してくれる
 
+## modelの可視化
+
+* modelのビジュアル可視化。要install and PATH setting GraphViz, pydot
+    * functional API を利用した複雑なモデルの時はこちら
+
+```python
+plot_model(model, to_file='./model.png', show_shapes=True, expand_nested=True)
+```
+
+* modelのテキスト可視化。Sequentialモデルならこれでも十分、らしい
+
+```python
+print(model.summary())
+```
+
 ## 訓練と評価の履歴をグラフで出す
 
 * model.fit() の引数で validation_data=(X_test, Y_test) などとして、評価用データセットを与えておくと、result.history[] が取れる
