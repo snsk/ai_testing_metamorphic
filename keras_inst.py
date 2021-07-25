@@ -55,7 +55,8 @@ model.compile(optimizer='adam',
 
 # モデルの訓練
 # 画像とラベルの対応関係を学習する
-model.fit(train_images, train_labels, epochs=5)
+model.fit(train_images, train_labels, epochs=3)
+model.save('fashion_mnist.h5')
 
 # 正解率の評価
 test_loss, test_acc = model.evaluate(test_images,  test_labels, verbose=2)
@@ -64,14 +65,14 @@ print('\nTest accuracy:', test_acc)
 # 予測する
 predictions = model.predict(test_images)
 print(predictions[0])
-print(np.argmax(predictions[0]))
+print(class_names[np.argmax(predictions[0])])
 
 # 訓練済みモデルを使って1枚の画像を判定する
 # テスト用データセットから画像を1枚取り出す
-img = test_images[0]
+img = test_images[1]
 # 画像を1枚だけのバッチのメンバーにする
 # kerasはリストに対して予測を行うように作られているので1枚でもリスト化する必要がある
 img = (np.expand_dims(img,0))
-
 predictions_single = model.predict(img)
 print(predictions_single)
+print(class_names[np.argmax(predictions_single[0])])
