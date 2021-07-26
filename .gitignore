@@ -1,3 +1,9 @@
+#data_files
+hiyashi/
+ramen/
+udon/
+soba/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
