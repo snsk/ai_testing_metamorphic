@@ -9,7 +9,7 @@ from PIL import Image
 import glob
 
 folder = ["ramen","hiyashi"]
-image_size = 50
+image_size = 100
 
 X = []
 Y = []
@@ -70,12 +70,13 @@ model.compile(
 )
 
 #モデルの訓練
-epochs_num=200
+epochs_num=65
 result = model.fit(X_train, Y_train, epochs=epochs_num, validation_data=(X_test, Y_test))
 
 #modelのビジュアル可視化。要install and PATH setting GraphViz, pydot
 #functional API を利用した複雑なモデルの時はこちら
 plot_model(model, to_file='./model.png', show_shapes=True, expand_nested=True)
+model.save('ramen_hiyashi.h5')
 #modelのテキスト可視化。Sequentialモデルならこれでも十分、らしい
 #print(model.summary())
 
@@ -89,7 +90,7 @@ plt.legend()
 plt.show()
 
 #評価 & 評価結果出力
-#print(model.evaluate(X_test, Y_test))
-#print('Test:')
-#test_loss, test_acc = model.evaluate(X_test, Y_test, verbose=1)
-#print('\nTest accuracy:', test_acc)
+print(model.evaluate(X_test, Y_test))
+print('Test:')
+test_loss, test_acc = model.evaluate(X_test, Y_test, verbose=1)
+Sprint('\nTest accuracy:', test_acc)
