@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from PIL import Image
 import glob
 
-folder = ["ramen","hiyashi"]
+folder = ["udon","soba"]
 image_size = 50
 
 X = []
@@ -70,14 +70,20 @@ model.compile(
 )
 
 #モデルの訓練
-epochs_num=200
+epochs_num=500
 result = model.fit(X_train, Y_train, epochs=epochs_num, validation_data=(X_test, Y_test))
 
 #modelのビジュアル可視化。要install and PATH setting GraphViz, pydot
 #functional API を利用した複雑なモデルの時はこちら
-plot_model(model, to_file='./model.png', show_shapes=True, expand_nested=True)
+# plot_model(model, to_file='./model.png', show_shapes=True, expand_nested=True)
 #modelのテキスト可視化。Sequentialモデルならこれでも十分、らしい
-#print(model.summary())
+# print(model.summary())
+
+#評価 & 評価結果出力
+print(model.evaluate(X_test, Y_test))
+print('Test:')
+test_loss, test_acc = model.evaluate(X_test, Y_test, verbose=1)
+print('\nTest accuracy:', test_acc)
 
 import matplotlib.pyplot as plt
  
@@ -87,9 +93,3 @@ plt.xlabel('Epochs')
 plt.ylabel('Accuracy')
 plt.legend()
 plt.show()
-
-#評価 & 評価結果出力
-#print(model.evaluate(X_test, Y_test))
-#print('Test:')
-#test_loss, test_acc = model.evaluate(X_test, Y_test, verbose=1)
-#print('\nTest accuracy:', test_acc)

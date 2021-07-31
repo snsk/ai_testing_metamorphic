@@ -12,7 +12,7 @@
     * そのあと回答を出す出力レイヤは、DenceとSoftMax
 
 ## modelの保存と読み込み
-
+    
 ```python
 from tensorflow.python.keras.models import load_model
 ```

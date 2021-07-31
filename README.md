@@ -11,3 +11,7 @@
 ## 構成
 
 * python 3.6.8
+
+## note
+
+* 画像データは crawler.py で収集
