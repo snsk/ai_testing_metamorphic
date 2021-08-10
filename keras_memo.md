@@ -11,6 +11,17 @@
     * チュートリアルで利用中間レイヤは Dence（全結合ニューラルネットワークレイヤ）と ReLU
     * そのあと回答を出す出力レイヤは、DenceとSoftMax
 
+## 画像の行列変換
+
+```python
+img = img_to_array(load_img(colab_root + 'ramen_2.jpg', target_size=(100,100)))
+img_nad = img_to_array(img)/255
+img_nad = img_nad[None, ...]
+```
+
+* load_img: 画像をPIL形式に変換する
+* PIL：Python Image Library。Pillowというライブラリでサポートされる。
+
 ## modelの保存と読み込み
     
 ```python
