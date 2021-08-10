@@ -1,8 +1,5 @@
 #data_files
-hiyashi/
-ramen/
-udon/
-soba/
+datafiles/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

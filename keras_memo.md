@@ -11,6 +11,11 @@
     * チュートリアルで利用中間レイヤは Dence（全結合ニューラルネットワークレイヤ）と ReLU
     * そのあと回答を出す出力レイヤは、DenceとSoftMax
 
+## kerasの画像変形
+
+* ImageDataGenerator を利用する
+* from keras.preprocessing import image で、image のコンストラクタで変形方法を指示
+
 ## 画像の行列変換
 
 ```python
@@ -80,6 +85,34 @@ model.summary()
 
 読み出しは load_model() でファイル名を指定。
 model.summary でどのようなモデルかを表示してくれる
+
+# 1ファイルの判定
+
+```python
+from keras.models import load_model
+import numpy as np
+from keras.preprocessing.image import img_to_array, load_img
+
+colab_root = '/content/drive/MyDrive/colab_root/'
+
+# modelと画像ファイルの読み込み
+model = load_model(colab_root + 'ramen_hiyashi_acc0.9675.h5')
+
+# 画像ファイルの行列変換
+img = img_to_array(load_img(colab_root + 'ramen_2.jpg', target_size=(100,100)))
+img_nad = img_to_array(img)/255
+img_nad = img_nad[None, ...]
+
+# 正解ラベルの定義
+label=['ramen', 'hiyashi']
+
+# 判別
+pred = model.predict(img_nad, batch_size=1, verbose=0)
+score = np.max(pred)
+pred_label = label[np.argmax(pred[0])]
+print('name:',pred_label)
+print('score:',score)
+```
 
 ## modelの可視化
 
