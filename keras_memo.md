@@ -16,10 +16,10 @@
 * model.compile(loss='mean_squared_error', optimizer='sgd') とかで loss で指定する
 
 ```
-答えが数値のとき
+答えが数値のとき（回帰）
    * mean_squared_error：平均二乗誤差。差分の2乗の和
    * mean_absolute_error：平均絶対誤差。差分の和（評価関数として使う）
-答えがカテゴリのとき
+答えがクラス分類のとき
    * categorical_crossentropy：ラベル（つまり答え）がOne-hotベクトル化されたNクラス分類の時に使用
    * sparse_categorical_crossentropy：Nクラス分類なんだけど、ラベルが数値の場合はこっちを使う
    * binary_crossentropy：2クラス分類の時に使用（0か1か）
