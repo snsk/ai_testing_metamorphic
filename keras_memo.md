@@ -11,6 +11,21 @@
     * チュートリアルで利用中間レイヤは Dence（全結合ニューラルネットワークレイヤ）と ReLU
     * そのあと回答を出す出力レイヤは、DenceとSoftMax
 
+## 損失関数
+
+* model.compile(loss='mean_squared_error', optimizer='sgd') とかで loss で指定する
+
+```
+答えが数値のとき
+   * mean_squared_error：平均二乗誤差。差分の2乗の和
+   * mean_absolute_error：平均絶対誤差。差分の和（評価関数として使う）
+答えがカテゴリのとき
+   * categorical_crossentropy：ラベル（つまり答え）がOne-hotベクトル化されたNクラス分類の時に使用
+   * sparse_categorical_crossentropy：Nクラス分類なんだけど、ラベルが数値の場合はこっちを使う
+   * binary_crossentropy：2クラス分類の時に使用（0か1か）
+出典：https://mj-vitag.com/contents/?p=227
+```
+
 ## kerasの画像変形
 
 * ImageDataGenerator を利用する
