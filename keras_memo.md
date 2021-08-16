@@ -147,3 +147,32 @@ plt.ylabel('Accuracy')
 plt.legend()
 plt.show()
 ```
+
+## 訓練と評価と損失関数の履歴をグラフで出す
+
+```python
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(10,5)) # グラフのサイズ
+
+# Plot training & validation accuracy values
+plt.subplot(1,2,1) # 1つめのグラフ
+
+plt.plot(result.history['accuracy'])
+plt.plot(result.history['val_accuracy'])
+plt.title('Model accuracy')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+
+# Plot training & validation loss values
+plt.subplot(1,2,2) # 2つめのグラフ
+plt.plot(result.history['loss'])
+plt.plot(result.history['val_loss'])
+plt.title('Model loss')
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+    
+plt.show() # グラフを表示する
+```
